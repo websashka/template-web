@@ -1,0 +1,20 @@
+services:
+  node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run dev
+    volumes:
+      - ./src:/home/node/app/src
+    env_file:
+      - .env
+    expose:
+      - "8080"
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    volumes:
+      - ./public:/usr/share/nginx/public
+    ports:
+      - "80:80"
